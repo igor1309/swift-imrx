@@ -1,23 +1,47 @@
 // swift-tools-version: 5.9
-// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
-    name: "IMRx",
+    name: "swift-imrx",
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
-        .library(
-            name: "IMRx",
-            targets: ["IMRx"]),
+        .imrx,
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
-        .target(
-            name: "IMRx"),
-        .testTarget(
-            name: "IMRxTests",
-            dependencies: ["IMRx"]),
+        .imrx,
+        .imrxTests,
     ]
 )
+
+private extension Product {
+    
+    static let imrx = library(
+        name: .imrx,
+        targets: [
+            .imrx
+        ]
+    )
+}
+
+private extension Target {
+    
+    static let imrx = target(name: .imrx)
+    
+    static let imrxTests = testTarget(
+        name: .imrxTests,
+        dependencies: [
+            .imrx
+        ]
+    )
+}
+
+private extension Target.Dependency {
+    
+    static let imrx = byName(name: .imrx)
+}
+
+private extension String {
+    
+    static let imrx = "IMRx"
+    static let imrxTests = "IMRxTests"
+}
