@@ -6,6 +6,8 @@ Welcome to `IMRX`, a Swift package designed by Igor Malyarov. The name `IMRX` is
 
 `IMRX` is a Swift package developed to enhance the Swift development experience. It provides a set of tools, extensions, and utilities designed to streamline and optimize your coding process in Swift.
 
+![IMRX Swift Package](imgs/Rx.drawio.png)
+
 ## Features
 
 - **User-Friendly API**: `IMRX` offers an intuitive and easy-to-use API, making it accessible for developers at all levels.
