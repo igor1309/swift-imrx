@@ -5,7 +5,7 @@
 //  Created by Igor Malyarov on 20.01.2024.
 //
 
-protocol EffectHandler<Event, Effect> {
+public protocol EffectHandler<Event, Effect> {
     
     associatedtype Event: Equatable
     associatedtype Effect: Equatable

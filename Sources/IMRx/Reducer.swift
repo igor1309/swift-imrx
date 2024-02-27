@@ -5,7 +5,7 @@
 //  Created by Igor Malyarov on 20.01.2024.
 //
 
-protocol Reducer<State, Event, Effect> {
+public protocol Reducer<State, Event, Effect> {
     
     associatedtype State
     associatedtype Event
@@ -14,7 +14,7 @@ protocol Reducer<State, Event, Effect> {
     func reduce(_ state: State,_ event: Event) -> (State, Effect?)
 }
 
-extension Reducer {
+public extension Reducer {
     
     func reduce(
         _ state: inout State,

@@ -7,9 +7,8 @@
 
 import CombineSchedulers
 import Foundation
-import IMRx
 
-extension RxViewModel where State: Equatable {
+public extension RxViewModel where State: Equatable {
     
     convenience init(
         initialState: State,
