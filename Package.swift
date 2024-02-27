@@ -4,8 +4,16 @@ import PackageDescription
 
 let package = Package(
     name: "swift-imrx",
+    platforms: [
+        .iOS(.v13),
+        .macOS(.v11)
+    ],
     products: [
         .imrx,
+    ],
+    dependencies: [
+        .combineSchedulers,
+        .customDump,
     ],
     targets: [
         .imrx,
@@ -25,12 +33,19 @@ private extension Product {
 
 private extension Target {
     
-    static let imrx = target(name: .imrx)
+    static let imrx = target(
+        name: .imrx,
+        dependencies: [
+            .combineSchedulers,
+        ]
+    )
     
     static let imrxTests = testTarget(
         name: .imrxTests,
         dependencies: [
-            .imrx
+            .combineSchedulers,
+            .customDump,
+            .imrx,
         ]
     )
 }
@@ -56,11 +71,11 @@ private extension Package.Dependency {
     )
     static let combineSchedulers = Package.Dependency.package(
         url: .pointFreeGitHub + .combine_schedulers,
-        from: .init(0, 9, 1)
+        from: .init(1, 0, 0)
     )
     static let customDump = Package.Dependency.package(
         url: .pointFreeGitHub + .swift_custom_dump,
-        from: .init(0, 10, 2)
+        from: .init(1, 2, 0)
     )
     static let identifiedCollections = Package.Dependency.package(
         url: .pointFreeGitHub + .swift_identified_collections,
