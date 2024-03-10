@@ -11,11 +11,13 @@ public protocol Reducer<State, Event, Effect> {
     associatedtype Event
     associatedtype Effect
     
+    @MainActor
     func reduce(_ state: State,_ event: Event) -> (State, Effect?)
 }
 
 public extension Reducer {
     
+    @MainActor
     func reduce(
         _ state: inout State,
         _ event: Event

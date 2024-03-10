@@ -38,6 +38,7 @@ public final class RxViewModel<State, Event, Effect>: ObservableObject {
 
 public extension RxViewModel {
     
+    @MainActor
     func event(_ event: Event) {
         
         let (state, effect) = reduce(state, event)
@@ -55,8 +56,8 @@ public extension RxViewModel {
 
 public extension RxViewModel {
     
-    typealias Reduce = (State, Event) -> (State, Effect?)
-    typealias HandleEffect = (Effect, @escaping (Event) -> Void) -> Void
+    typealias Reduce = @MainActor (State, Event) -> (State, Effect?)
+    typealias HandleEffect = (Effect, @MainActor @escaping (Event) -> Void) -> Void
 }
 
 public extension RxViewModel where State: Equatable {

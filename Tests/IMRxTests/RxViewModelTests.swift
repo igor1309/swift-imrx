@@ -18,6 +18,7 @@ final class RxViewModelTests: XCTestCase {
         XCTAssertNoDiff(effectHandler.callCount, 0)
     }
     
+    @MainActor
     func test_event_shouldCallReducerWithGivenStateAndEvent() {
         
         let initialState = makeState()
@@ -33,6 +34,7 @@ final class RxViewModelTests: XCTestCase {
         XCTAssertNoDiff(reducer.messages.map(\.event), [event])
     }
     
+    @MainActor
     func test_event_shouldNotCallEffectHandlerOnNilEffect() {
         
         let effect: Effect? = nil
@@ -45,6 +47,7 @@ final class RxViewModelTests: XCTestCase {
         XCTAssertNoDiff(effectHandler.callCount, 0)
     }
     
+    @MainActor
     func test_event_shouldCallEffectHandlerOnNonNilEffect() {
         
         let effect: Effect = .load
@@ -57,6 +60,7 @@ final class RxViewModelTests: XCTestCase {
         XCTAssertNoDiff(effectHandler.messages.map(\.effect), [effect])
     }
     
+    @MainActor
     func test_event_shouldCallReducerTwiceOnEffect() {
         
         let (sut, reducer, effectHandler) = makeSUT(
@@ -71,6 +75,7 @@ final class RxViewModelTests: XCTestCase {
         XCTAssertNoDiff(reducer.callCount, 2)
     }
     
+    @MainActor
     func test_event_shouldReducerWithGivenStateAndEvent() {
         
         let initialState = makeState()
@@ -95,6 +100,7 @@ final class RxViewModelTests: XCTestCase {
         ])
     }
     
+    @MainActor
     func test_event_shouldDeliverStateValues() {
         
         let initialState = makeState()
