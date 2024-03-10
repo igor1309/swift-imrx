@@ -140,8 +140,7 @@ final class RxViewModelTests: XCTestCase {
         let sut = SUT(
             initialState: initialState,
             reducer: reducer,
-            effectHandler: effectHandler,
-            scheduler: .immediate
+            effectHandler: effectHandler
         )
         
         trackForMemoryLeaks(sut, file: file, line: line)

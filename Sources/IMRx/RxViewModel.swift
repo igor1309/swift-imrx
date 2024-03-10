@@ -6,7 +6,6 @@
 //
 
 import Combine
-import CombineSchedulers
 import Foundation
 
 public final class RxViewModel<State, Event, Effect>: ObservableObject {
@@ -22,8 +21,7 @@ public final class RxViewModel<State, Event, Effect>: ObservableObject {
         initialState: State,
         reduce: @escaping Reduce,
         handleEffect: @escaping HandleEffect,
-        predicate: @escaping (State, State) -> Bool,
-        scheduler: AnySchedulerOf<DispatchQueue> = .main
+        predicate: @escaping (State, State) -> Bool
     ) {
         self.state = initialState
         self.reduce = reduce
@@ -31,7 +29,6 @@ public final class RxViewModel<State, Event, Effect>: ObservableObject {
         
         stateSubject
             .removeDuplicates(by: predicate)
-            .receive(on: scheduler)
             .assign(to: &$state)
     }
 }
@@ -65,16 +62,14 @@ public extension RxViewModel where State: Equatable {
     convenience init(
         initialState: State,
         reduce: @escaping Reduce,
-        handleEffect: @escaping HandleEffect,
-        scheduler: AnySchedulerOf<DispatchQueue> = .main
+        handleEffect: @escaping HandleEffect
     ) {
         
         self.init(
             initialState: initialState,
             reduce: reduce,
             handleEffect: handleEffect,
-            predicate: ==,
-            scheduler: scheduler
+            predicate: ==
         )
     }
 }
