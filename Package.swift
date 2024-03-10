@@ -12,7 +12,6 @@ let package = Package(
         .imrx,
     ],
     dependencies: [
-        .combineSchedulers,
         .customDump,
     ],
     targets: [
@@ -34,16 +33,12 @@ private extension Product {
 private extension Target {
     
     static let imrx = target(
-        name: .imrx,
-        dependencies: [
-            .combineSchedulers,
-        ]
+        name: .imrx
     )
     
     static let imrxTests = testTarget(
         name: .imrxTests,
         dependencies: [
-            .combineSchedulers,
             .customDump,
             .imrx,
         ]

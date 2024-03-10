@@ -10,7 +10,7 @@ public protocol EffectHandler<Event, Effect> {
     associatedtype Event: Equatable
     associatedtype Effect: Equatable
     
-    typealias Dispatch = (Event) -> Void
+    typealias Dispatch = @MainActor (Event) -> Void
     
     func handleEffect(
         _ effect: Effect, 

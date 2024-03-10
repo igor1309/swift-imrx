@@ -22,6 +22,7 @@ where Event: Equatable,
         messages.append((effect, dispatch))
     }
     
+    @MainActor
     func complete(
         with event: Event,
         at index: Int = 0
@@ -29,6 +30,6 @@ where Event: Equatable,
         messages[index].dispatch(event)
     }
     
-    typealias Dispatch = (Event) -> Void
+    typealias Dispatch = @MainActor (Event) -> Void
     typealias Message = (effect: Effect, dispatch: Dispatch)
 }
