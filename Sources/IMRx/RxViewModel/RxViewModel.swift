@@ -22,7 +22,7 @@ public final class RxViewModel<State, Event, Effect>: ObservableObject {
         initialState: State,
         reduce: @escaping Reduce,
         handleEffect: @escaping HandleEffect,
-        predicate: @escaping (State, State) -> Bool,
+        predicate: @escaping (State, State) -> Bool = { _,_ in false },
         scheduler: AnySchedulerOf<DispatchQueue> = .main
     ) {
         self.state = initialState
