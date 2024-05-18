@@ -10,6 +10,7 @@ let package = Package(
     ],
     products: [
         .imrx,
+        .imTools,
     ],
     dependencies: [
         .combineSchedulers,
@@ -18,6 +19,8 @@ let package = Package(
     targets: [
         .imrx,
         .imrxTests,
+        .imTools,
+        .imToolsTests,
     ]
 )
 
@@ -27,6 +30,13 @@ private extension Product {
         name: .imrx,
         targets: [
             .imrx
+        ]
+    )
+    
+    static let imTools = library(
+        name: .imTools,
+        targets: [
+            .imTools
         ]
     )
 }
@@ -48,17 +58,37 @@ private extension Target {
             .imrx,
         ]
     )
+    
+    static let imTools = target(
+        name: .imTools,
+        dependencies: [
+            .combineSchedulers,
+        ]
+    )
+    
+    static let imToolsTests = testTarget(
+        name: .imToolsTests,
+        dependencies: [
+            .customDump,
+            .imTools,
+        ]
+    )
 }
 
 private extension Target.Dependency {
     
     static let imrx = byName(name: .imrx)
+    
+    static let imTools = byName(name: .imTools)
 }
 
 private extension String {
     
     static let imrx = "IMRx"
     static let imrxTests = "IMRxTests"
+    
+    static let imTools = "IMTools"
+    static let imToolsTests = "IMToolsTests"
 }
 
 // MARK: - Point-Free
