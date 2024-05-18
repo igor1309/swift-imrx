@@ -1,0 +1,31 @@
+{
+  "configurations" : [
+    {
+      "id" : "56D8D73C-D370-48E5-9D86-9E9787029514",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testExecutionOrdering" : "random"
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "IMRxTests",
+        "name" : "IMRxTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "IMToolsTests",
+        "name" : "IMToolsTests"
+      }
+    }
+  ],
+  "version" : 1
+}

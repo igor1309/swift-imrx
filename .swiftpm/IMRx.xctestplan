@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "1EAF16BE-24A8-4DA3-B4B5-450C1E8B141E",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testExecutionOrdering" : "random"
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "IMRxTests",
+        "name" : "IMRxTests"
+      }
+    }
+  ],
+  "version" : 1
+}
