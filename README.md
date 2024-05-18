@@ -80,6 +80,10 @@ func makeSampleViewModel() -> SampleViewModel {
 
 Feel free to explore and experiment with the functionalities that `IMRX` offers in your Swift applications.
 
+## Decorators
+
+In `IMRX`, decorators can be a powerful way to enhance and modify the behavior of your functions or classes without changing their core implementation. If you're interested in learning more about how decorators work and how you can leverage them in your Swift projects, check out this [blog post on decorators](https://yourblog.com/decorators-in-swift).
+
 ## Contributing
 
 Contributions to `IMRX` are warmly welcomed! If you'd like to contribute, please feel free to fork the repository, make your changes, and create a pull request.
