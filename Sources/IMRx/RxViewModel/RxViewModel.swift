@@ -14,6 +14,7 @@ public final class RxViewModel<State, Event, Effect>: ObservableObject {
     @Published public private(set) var state: State
     
     private let stateSubject = PassthroughSubject<State, Never>()
+    private var currentState: State
     
     private let reduce: Reduce
     private let handleEffect: HandleEffect
@@ -26,6 +27,7 @@ public final class RxViewModel<State, Event, Effect>: ObservableObject {
         scheduler: AnySchedulerOf<DispatchQueue> = .main
     ) {
         self.state = initialState
+        self.currentState = initialState
         self.reduce = reduce
         self.handleEffect = handleEffect
         
@@ -40,7 +42,8 @@ public extension RxViewModel {
     
     func event(_ event: Event) {
         
-        let (state, effect) = reduce(state, event)
+        let (state, effect) = reduce(currentState, event)
+        currentState = state
         stateSubject.send(state)
         
         if let effect {
