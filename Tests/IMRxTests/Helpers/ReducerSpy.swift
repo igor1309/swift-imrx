@@ -7,7 +7,10 @@
 
 import IMRx
 
-final class ReducerSpy<State, Event, Effect>: Reducer {
+final class ReducerSpy<State, Event, Effect>: Reducer
+where State: Equatable,
+      Event: Equatable,
+      Effect: Equatable {
     
     private var stub: [(State, Effect?)]
     private(set) var messages = [Message]()
