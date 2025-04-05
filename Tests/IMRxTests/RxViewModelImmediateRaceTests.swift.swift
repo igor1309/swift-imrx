@@ -14,9 +14,7 @@ final class RxViewModelImmediateRaceTests: XCTestCase {
     
     func test_eventAppend_updatesStateWithConcatenatedValues() {
         
-        let (sut, stateSpy) = makeSUT(
-            initialState: .init(value: "")
-        )
+        let (sut, stateSpy) = makeSUT("")
         XCTAssertNoDiff(stateSpy.values, [
             .init(value: ""),
         ])
@@ -39,9 +37,7 @@ final class RxViewModelImmediateRaceTests: XCTestCase {
     
     func test_eventSetValue_replacesStateValue() {
         
-        let (sut, stateSpy) = makeSUT(
-            initialState: .init(value: "")
-        )
+        let (sut, stateSpy) = makeSUT("")
         XCTAssertNoDiff(stateSpy.values, [
             .init(value: ""),
         ])
@@ -62,7 +58,7 @@ final class RxViewModelImmediateRaceTests: XCTestCase {
     private typealias StateSpy = ValueSpy<State>
     
     private func makeSUT(
-        initialState: State? = nil,
+        _ initialValue: String = anyMessage(),
         file: StaticString = #file,
         line: UInt = #line
     ) -> (
@@ -70,7 +66,7 @@ final class RxViewModelImmediateRaceTests: XCTestCase {
         stateSpy: StateSpy
     ) {
         let sut = SUT(
-            initialState: initialState ?? makeState(),
+            initialState: makeState(initialValue),
             reduce: {
                 
                 switch $1 {
