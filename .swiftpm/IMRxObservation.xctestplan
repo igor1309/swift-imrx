@@ -1,7 +1,7 @@
 {
   "configurations" : [
     {
-      "id" : "56D8D73C-D370-48E5-9D86-9E9787029514",
+      "id" : "D727A491-F2B5-42B8-B116-150C99328ADC",
       "name" : "Test Scheme Action",
       "options" : {
 
@@ -9,28 +9,15 @@
     }
   ],
   "defaultOptions" : {
+    "performanceAntipatternCheckerEnabled" : true,
     "testExecutionOrdering" : "random"
   },
   "testTargets" : [
     {
       "target" : {
         "containerPath" : "container:",
-        "identifier" : "IMToolsTests",
-        "name" : "IMToolsTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:",
         "identifier" : "IMRxObservationTests",
         "name" : "IMRxObservationTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:",
-        "identifier" : "IMRxTests",
-        "name" : "IMRxTests"
       }
     }
   ],

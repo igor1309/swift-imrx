@@ -10,15 +10,19 @@ let package = Package(
     ],
     products: [
         .imrx,
+        .imrxObservation,
         .imTools,
     ],
     dependencies: [
         .combineSchedulers,
+        .concurrencyExtras,
         .customDump,
     ],
     targets: [
         .imrx,
         .imrxTests,
+        .imrxObservation,
+        .imrxObservationTests,
         .imTools,
         .imToolsTests,
     ]
@@ -32,7 +36,14 @@ private extension Product {
             .imrx
         ]
     )
-    
+
+    static let imrxObservation = library(
+        name: .imrxObservation,
+        targets: [
+            .imrxObservation
+        ]
+    )
+
     static let imTools = library(
         name: .imTools,
         targets: [
@@ -58,7 +69,22 @@ private extension Target {
             .imrx,
         ]
     )
-    
+
+    static let imrxObservation = target(
+        name: .imrxObservation,
+        dependencies: [],
+        exclude: ["ADR"]
+    )
+
+    static let imrxObservationTests = testTarget(
+        name: .imrxObservationTests,
+        dependencies: [
+            .concurrencyExtras,
+            .customDump,
+            .imrxObservation,
+        ]
+    )
+
     static let imTools = target(
         name: .imTools,
         dependencies: [
@@ -77,7 +103,9 @@ private extension Target {
 private extension Target.Dependency {
     
     static let imrx = byName(name: .imrx)
-    
+
+    static let imrxObservation = byName(name: .imrxObservation)
+
     static let imTools = byName(name: .imTools)
 }
 
@@ -85,7 +113,10 @@ private extension String {
     
     static let imrx = "IMRx"
     static let imrxTests = "IMRxTests"
-    
+
+    static let imrxObservation = "IMRxObservation"
+    static let imrxObservationTests = "IMRxObservationTests"
+
     static let imTools = "IMTools"
     static let imToolsTests = "IMToolsTests"
 }
@@ -100,6 +131,10 @@ private extension Package.Dependency {
     )
     static let combineSchedulers = Package.Dependency.package(
         url: .pointFreeGitHub + .combine_schedulers,
+        from: .init(1, 0, 0)
+    )
+    static let concurrencyExtras = Package.Dependency.package(
+        url: .pointFreeGitHub + .swift_concurrency_extras,
         from: .init(1, 0, 0)
     )
     static let customDump = Package.Dependency.package(
@@ -142,6 +177,10 @@ private extension Target.Dependency {
         name: .combineSchedulers,
         package: .combine_schedulers
     )
+    static let concurrencyExtras = product(
+        name: .concurrencyExtras,
+        package: .swift_concurrency_extras
+    )
     static let customDump = product(
         name: .customDump,
         package: .swift_custom_dump
@@ -181,6 +220,9 @@ private extension String {
     
     static let combineSchedulers = "CombineSchedulers"
     static let combine_schedulers = "combine-schedulers"
+
+    static let concurrencyExtras = "ConcurrencyExtras"
+    static let swift_concurrency_extras = "swift-concurrency-extras"
     
     static let customDump = "CustomDump"
     static let swift_custom_dump = "swift-custom-dump"
