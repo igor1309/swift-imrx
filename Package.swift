@@ -1,6 +1,6 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 6.0
 
-import PackageDescription
+@preconcurrency import PackageDescription
 
 let package = Package(
     name: "swift-imrx",
@@ -25,7 +25,8 @@ let package = Package(
         .imrxObservationTests,
         .imTools,
         .imToolsTests,
-    ]
+    ],
+    swiftLanguageModes: [.v5]
 )
 
 private extension Product {
@@ -73,7 +74,8 @@ private extension Target {
     static let imrxObservation = target(
         name: .imrxObservation,
         dependencies: [],
-        exclude: ["ADR"]
+        exclude: ["ADR"],
+        swiftSettings: [.swiftLanguageMode(.v6)]
     )
 
     static let imrxObservationTests = testTarget(
