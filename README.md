@@ -80,6 +80,22 @@ func makeSampleViewModel() -> SampleViewModel {
 
 Feel free to explore and experiment with the functionalities that `IMRX` offers in your Swift applications.
 
+### SyncModel
+
+`IMRxObservation` also has `SyncModel<State, Event>`, a state machine that reduces each event before `event(_:)` returns, so a read of `state` after it reflects every event sent before. It runs no effects: a doer observes `state`, does the work, and sends the result back through `event(_:)`. Use it when a caller must read state that includes the events it already sent; keep `ObservableModel` when effects belong inside the machine. See [ADR-003](Sources/IMRxObservation/ADR/003-sync-model.md).
+
+```swift
+import IMRxObservation
+
+@MainActor
+func makeLoader() -> SyncModel<LoaderState, LoaderEvent> {
+  SyncModel(initialState: LoaderState(), reduce: LoaderReducer.reduce)
+}
+
+// A doer, elsewhere: when `state.isLoading` turns true, load, then
+// `model.event(.loaded(result))` on the model's actor.
+```
+
 ## Decorators
 
 In `IMRX`, decorators can be a powerful way to enhance and modify the behavior of your functions or classes without changing their core implementation. If you're interested in learning more about how decorators work and how you can leverage them in your Swift projects, check out this [blog post on decorators](https://yourblog.com/decorators-in-swift).
