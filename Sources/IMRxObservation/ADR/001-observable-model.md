@@ -1,7 +1,7 @@
 ---
 date: 2026-04-07
 title: "ADR-001: ObservableModel — Observation-based reactive state machine"
-status: accepted
+status: accepted, Sendability superseded by ADR-002
 ---
 
 # ADR-001: ObservableModel — Observation-based reactive state machine

@@ -9,7 +9,9 @@ import Observation
 
 @available(iOS 17, macOS 14, tvOS 17, watchOS 10, *)
 @Observable
-public final class ObservableModel<State, Event, Effect>: @unchecked Sendable {
+/// Reduces on the actor it was made on: the main actor for a UI model, an
+/// owning actor for any other. It is not `Sendable`, so it cannot leave it.
+public final class ObservableModel<State, Event: Sendable, Effect> {
 
     public private(set) var state: State
 
@@ -23,7 +25,8 @@ public final class ObservableModel<State, Event, Effect>: @unchecked Sendable {
         initialState: State,
         reduce: @escaping Reduce,
         handleEffect: @escaping HandleEffect,
-        predicate: @escaping Predicate = { _, _ in false }
+        predicate: @escaping Predicate = { _, _ in false },
+        isolation: isolated (any Actor)? = #isolation
     ) {
         self.state = initialState
         self.reduce = reduce
@@ -34,6 +37,8 @@ public final class ObservableModel<State, Event, Effect>: @unchecked Sendable {
         self.continuation = continuation
 
         self.task = Task { [weak self] in
+            // Capturing the caller's isolation runs the loop on its actor.
+            _ = isolation
             for await event in stream {
                 guard let self else { return }
                 self.processEvent(event)
@@ -89,13 +94,15 @@ public extension ObservableModel where State: Equatable {
     convenience init(
         initialState: State,
         reduce: @escaping Reduce,
-        handleEffect: @escaping HandleEffect
+        handleEffect: @escaping HandleEffect,
+        isolation: isolated (any Actor)? = #isolation
     ) {
         self.init(
             initialState: initialState,
             reduce: reduce,
             handleEffect: handleEffect,
-            predicate: ==
+            predicate: ==,
+            isolation: isolation
         )
     }
 }

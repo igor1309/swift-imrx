@@ -25,7 +25,7 @@ import PackageDescription
 let package = Package(
     name: "YourProject",
     dependencies: [
-        .package(url: "https://github.com/igor1309/IMRX.git", from: "1.0.0")
+        .package(url: "https://github.com/igor1309/swift-imrx.git", from: "1.0.0")
     ]
 )
 ```
